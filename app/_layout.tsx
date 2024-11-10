@@ -1,37 +1,81 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+import { Stack } from "expo-router";
+import "../global.css";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="screens/LP/LandingPage"
+        options={{
+          animation: "slide_from_bottom",
+          headerShown: false,
+          gestureDirection: "horizontal", // This makes the screen slide from the right by default
+          animationDuration: 0.01,
+        }}
+      />
+      <Stack.Screen
+        name="screens/LPT/LandingPageT"
+        options={{
+          animation: "slide_from_bottom",
+          headerShown: false,
+          gestureDirection: "horizontal", // Ensure the screen transition happens from right
+          animationDuration: 0.01,
+        }}
+      />
+      <Stack.Screen
+        name="screens/CS/ConfirmSelection"
+        options={{
+          animation: "slide_from_right",
+          headerShown: false,
+
+          animationDuration: 0.01,
+        }}
+      />
+      <Stack.Screen
+        name="screens/History/History"
+        options={{
+          animation: "slide_from_bottom",
+          headerShown: false,
+
+          animationDuration: 0.01,
+        }}
+      />
+      <Stack.Screen
+        name="screens/ML/MovieList"
+        options={{
+          animation: "slide_from_right",
+          headerShown: false,
+
+          animationDuration: 0.01,
+        }}
+      />
+      <Stack.Screen
+        name="screens/TL/MovieList"
+        options={{
+          animation: "slide_from_right",
+          headerShown: false,
+
+          animationDuration: 0.01,
+        }}
+      />
+      <Stack.Screen
+        name="screens/SS/SeatSelection"
+        options={{
+          animation: "slide_from_right",
+          headerShown: false,
+
+          animationDuration: 0.01,
+        }}
+      />
+      <Stack.Screen
+        name="screens/MP/[mid]"
+        options={{
+          animation: "slide_from_right",
+          headerShown: false,
+          animationDuration: 0.01,
+        }}
+      />
+    </Stack>
   );
 }
